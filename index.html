@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Mortgage calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="banksMenu">
+        <div class="backround">
+          <div class="marg">
+            <h2 class="title_select">Select a bank</h2>
+            <div class="all_banks" id="all_banks"></div>
+            <div class="footer_banks">
+              <button id="add" class="btn_footer">Add</button>
+              <button id="chahge" class="btn_footer">Chahge</button>
+              <button id="remove" class="btn_footer">Remove</button>
+            </div>
+          </div>
+        </div>
+        <div class="block_add" id="inputBtn">
+          <div class="backround">
+            <div class="marg">
+              <h2 class="title_select">Create a bank</h2>
+              <form
+                id="formBank"
+                name="main"
+                action="#"
+                onsubmit="checkForm(this)"
+                method="post"
+              >
+                <input
+                  class="btn_bank"
+                  name="name"
+                  placeholder="Name Bank"
+                  type="text"
+                  id="inputName"
+                />
+                <input
+                  class="btn_bank"
+                  name="precents"
+                  placeholder="Interest Rate"
+                  type="number"
+                  id="inputPrecent"
+                />
+                <input
+                  class="btn_bank"
+                  name="maxCredit"
+                  placeholder="Max Credit"
+                  type="number"
+                  id="inputMax"
+                />
+                <input
+                  class="btn_bank"
+                  name="minDownPayment"
+                  placeholder="Min Down Payment"
+                  type="number"
+                  id="inputMin"
+                />
+                <div class="footer_banks">
+                  <button
+                    type="submit"
+                    id="saveNewBank"
+                    class="btn_footer"
+                    value="Save"
+                  >
+                    Save
+                  </button>
+                  <button  id="cancelNewBank" class="btn_footer" value="Cancel">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="calculator banksMenu">
+        <form action="" class="formcalc">
+          <label for="">Real estate price</label>
+          <input class="btb_bank" id="searchBank" type="text">
+          <label for="">Down payment</label>
+          <input class="btb_bank" id="startCredit" type="number" />
+          <label for="">Credit term</label>
+          <input class="btb_bank" id="firstPayment" type="number" />
+        </form>
+
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
+width
