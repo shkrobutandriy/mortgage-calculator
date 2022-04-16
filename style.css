@@ -8,13 +8,15 @@ body {
 input {
 display: flex;
 align-items: center;
-margin: 16px 0;
 width: 320px;
 border: #c4c8cc solid 1px;
 border-radius: 8px;
 }
+input.btn_bank {
+  margin: 16px 0;
+}
 .container {
-  max-width: 760px;
+  max-width: 840px;
   margin: 0 auto;
   width: 100%;
   height: auto;
@@ -31,7 +33,7 @@ border-radius: 8px;
 }
 .backround {
   background-color: #ffff;
-  width: 368px;
+  width: 390px;
   height: 420px;
   border-radius: 8px;
   margin: 24px 8px;
@@ -39,7 +41,7 @@ border-radius: 8px;
 }
 .calculator {
   background-color: #ffff;
-  max-width: 100%;
+  width: 100%;
   height: 420px;
   border-radius: 8px;
   margin: 24px 24px 0 0;
@@ -111,6 +113,7 @@ background-color: rgb(197, 68, 68);
 display: flex;
 justify-content: space-between;
 align-items: center;
+margin-top: 24px;
 }
 
 
@@ -119,4 +122,16 @@ display: none;
 }
 .block_add.active {
 display: block;
+}
+.calculator_menu{
+  display: flex;
+  justify-content: space-between;
+  margin: 24px 24px 40px  24px;
+}
+.form_bank {
+  height: 240px;
+}
+.result_amount {
+  border-bottom: #c4c8cc solid 1px;
+  width: 320px;
 }

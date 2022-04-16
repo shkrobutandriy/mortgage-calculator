@@ -43,7 +43,7 @@ function renderBanks(banks) {
   allBank.innerHTML = "";
   banks.map((bank) => {
     const bankBtn = `
-       <button id="btn_bank" class="bank btn_bank">
+       <button id="btn_bank" data-name="${bank.name}" class="bank btn_bank">
            <div>${bank.name}</div>
           <div>${bank.precents}<span>%</span></div>
         </button>
@@ -55,39 +55,68 @@ function renderBanks(banks) {
     allBank.innerHTML += bankBtn;
   });
 }
-
-// function selectBanks(banks) {
-//   banks.map((bank) => {
-//     const bankSel = `
-//       <option width="320px" id="btn_bank" class="btn_bank footer_banks" value="">${bank.name} - Max Credit ${bank.maxCredit}, Min Down Payment ${bank.minPay} ${bank.precents}<span>%</span></option>
-
-//     `;
-//     selBtn.innerHTML += bankSel;
-//   });
-// }
-
 // button
-addBanks.addEventListener("click", () => {
-  activeAdd.classList.add("active");
-});
+
 function inputClean() {
   inputName.value = "";
   inputPrecents.value = "";
   inputMaxCredit.value = "";
   inputMinPay.value = "";
 }
+function chahgeB(bank) {
+  inputName.value = [bank[0].name];
+  inputPrecents.value = [bank[0].precents];
+  inputMaxCredit.value = [bank[0].maxCredit];
+  inputMinPay.value = [bank[0].minPay];
+}
+const takeActiveBank = (currentActive) => {
+  const dataValue = currentActive.dataset.name;
+  const currentBank = banks.find((bank) => bank.name === dataValue);
+  console.log(currentBank);
+};
 function addBank(bank) {
-  banks.push(bank);
+  banks.unshift(bank);
   renderBanks(banks);
 }
-
-chahgeBanks.addEventListener("click", () => {});
+addBanks.addEventListener("click", () => {
+  activeAdd.classList.add("active");
+});
+chahgeBanks.addEventListener("click", (event) => {
+  event.preventDefault();
+  const bankEl = document.querySelectorAll(".bank");
+  for (let i = 0; i < bankEl.length; i += 1) {
+    const el = bankEl[i];
+    activeAdd.classList.add("active");
+    if (el.classList.contains("active")) {
+      el.classList.remove("active");
+    }
+    if (!el.classList.contains("active_fix")) {
+      el.classList.add("active_fix");
+    } else {
+      el.classList.remove("active_fix");
+    }
+    if (el.classList.contains("active_fix")) {
+      el.addEventListener("click", () => {
+        if (el.classList.contains("active_fix")) {
+          const a = banks.slice(i);
+          banks.splice(i, 1);
+          renderBanks(banks);
+          chahgeB(a);
+        }
+      });
+    }
+  }
+});
 
 removeBanks.addEventListener("click", (event) => {
   event.preventDefault();
   const bankEl = document.querySelectorAll(".bank");
   for (let i = 0; i < bankEl.length; i += 1) {
     const el = bankEl[i];
+    console.log(el);
+    if (el.classList.contains("active_fix")) {
+      el.classList.remove("active_fix");
+    }
     if (!el.classList.contains("active")) {
       el.classList.add("active");
     } else {
@@ -113,7 +142,6 @@ saveNewBank.addEventListener("click", (event) => {
   const formPrecents = formI.get("precents");
   const formMaxCredit = formI.get("maxCredit");
   const formMinDownPayment = formI.get("minDownPayment");
-  console.log(formName);
   if (
     formName == "" ||
     formPrecents == "" ||

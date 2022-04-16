@@ -27,10 +27,10 @@
             <div class="marg">
               <h2 class="title_select">Create a bank</h2>
               <form
+                class="form_bank"
                 id="formBank"
                 name="main"
                 action="#"
-                onsubmit="checkForm(this)"
                 method="post"
               >
                 <input
@@ -61,37 +61,52 @@
                   type="number"
                   id="inputMin"
                 />
-                <div class="footer_banks">
-                  <button
-                    type="submit"
-                    id="saveNewBank"
-                    class="btn_footer"
-                    value="Save"
-                  >
-                    Save
-                  </button>
-                  <button  id="cancelNewBank" class="btn_footer" value="Cancel">
-                    Cancel
-                  </button>
-                </div>
               </form>
+              <div class="footer_banks">
+                <button
+                  type="submit"
+                  id="saveNewBank"
+                  class="btn_footer"
+                  value="Save"
+                >
+                  Save
+                </button>
+                <button id="cancelNewBank" class="btn_footer" value="Cancel">
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="calculator banksMenu">
-        <form action="" class="formcalc">
-          <label for="">Real estate price</label>
-          <input class="btb_bank" id="searchBank" type="text">
-          <label for="">Down payment</label>
-          <input class="btb_bank" id="startCredit" type="number" />
-          <label for="">Credit term</label>
-          <input class="btb_bank" id="firstPayment" type="number" />
-        </form>
-
+      <div class="calculator">
+        <div class="calculator_menu">
+          <form action="" class="formcalc">
+            <label for="">Real estate price</label>
+            <input class="btb_bank" id="searchBank" type="text" />
+            <label id="maxmin" for="">max min</label>
+            <label for="">Down payment</label>
+            <input class="btb_bank" id="startCredit" type="number" />
+            <label for="">Credit term</label>
+            <input class="btb_bank" id="firstPayment" type="number" />
+          </form>
+          <div class="calculation">
+            <div class="result">
+              <h3 class="subtitle">Loan amount</h3>
+              <div class="result_amount">0</div>
+            </div>
+            <div class="result">
+              <h3 class="subtitle">Monthly payment</h3>
+              <div class="result_amount">0</div>
+            </div>
+            <div class="result">
+              <h3 class="subtitle">Recommended income</h3>
+              <div class="result_amount">0</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script src="main.js"></script>
   </body>
 </html>
-width
