@@ -61,6 +61,13 @@
                   type="number"
                   id="inputMin"
                 />
+                <input
+                  class="btn_bank"
+                  name="term"
+                  placeholder="Term"
+                  type="number"
+                  id="inputTerm"
+                />
               </form>
               <div class="footer_banks">
                 <button
@@ -82,26 +89,27 @@
       <div class="calculator">
         <div class="calculator_menu">
           <form name="formCal" action="" class="formcalc">
-            <label for="">Real estate price</label>
-            <select name="bank" id="drop_down" onchange="selBan()"></select>
-            <label id="max" for="">Max Credit: </label>
-            <span id="min">Min Down Payment: </span>
-            <label for="">Down payment</label>
-            <input class="btb_bank" id="startCredit" type="number" />
-            <label for="">Credit term</label>
-            <input class="btb_bank" id="firstPayment" type="number" />
+            <div class="infoBank">
+              <label for="">Real estate price</label>
+              <select name="bank" id="drop_down" onchange="selBan()"></select>
+              <label id="max" for=""></label>
+              <label id="min"></label>
+              <label id="term"></label>
+            </div>
+            <div class="input_cal">
+              <label for="">Credit</label>
+              <input class="btb_bank" id="startCredit" type="number" />
+              <label for="">First Payment</label>
+              <input class="btb_bank" id="firstPayment" type="number" />
+            </div>
           </form>
           <div class="calculation">
             <div class="result">
               <h3 class="subtittle">Loan amount</h3>
               <div id="result_amount">0</div>
             </div>
-            <div class="result">
-              <h3 class="subtittle">Monthly payment</h3>
-              <div class="result_amount">0</div>
-            </div>
-            <div class="result">
-              <button id="res">result</button>
+            <div>
+              <button class="btn_footer" id="res">result</button>
             </div>
           </div>
         </div>

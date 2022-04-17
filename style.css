@@ -27,10 +27,7 @@ input.btn_bank {
   display: flex;
   flex-direction: column;
 }
-.formcalc {
-  display: flex;
-  flex-direction: column;
-}
+
 .backround {
   background-color: #ffff;
   width: 390px;
@@ -125,7 +122,7 @@ display: block;
 }
 .calculator_menu{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 24px 24px 40px  24px;
 }
 .form_bank {
@@ -140,4 +137,18 @@ display: block;
 }
 .drop.activedrop{
 display: block;
+}
+.formcalc {
+  display: flex;
+  justify-content: space-between;
+}
+.infoBank {
+  display: flex;
+  flex-direction: column;
+}
+.calculation {
+  border-bottom: #c4c8cc 1px solid;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }

@@ -13,6 +13,7 @@ const inputName = document.getElementById("inputName");
 const inputPrecents = document.getElementById("inputPrecent");
 const inputMaxCredit = document.getElementById("inputMax");
 const inputMinPay = document.getElementById("inputMin");
+const inputTerm = document.getElementById("inputTerm");
 
 const inputBtn = document.getElementById("inputBtn");
 const selBtn = document.getElementById("selBank");
@@ -23,18 +24,21 @@ const banks = [
     precents: 10,
     maxCredit: 500000,
     minPay: 35000,
+    term: 12,
   },
   {
     name: "Alfa",
     precents: 14.3,
     maxCredit: 350000,
     minPay: 20000,
+    term: 10,
   },
   {
     name: "Credo",
     precents: 17,
     maxCredit: 200000,
     minPay: 10000,
+    term: 18,
   },
 ];
 
@@ -52,6 +56,7 @@ function renderBanks(banks) {
         <div class="max_min">
           <div><span>Max Credit </span>${bank.maxCredit}<span>$</span></div>
           <div><span>Min Down Payment </span>${bank.minPay}<span>$</span></div>
+          <div><span>Term: </span>${bank.term}</div>
         </div>
     `;
     allBank.innerHTML += bankBtn;
@@ -64,12 +69,14 @@ function inputClean() {
   inputPrecents.value = "";
   inputMaxCredit.value = "";
   inputMinPay.value = "";
+  inputTerm.value = "";
 }
 function chahgeB(bank) {
   inputName.value = [bank[0].name];
   inputPrecents.value = [bank[0].precents];
   inputMaxCredit.value = [bank[0].maxCredit];
   inputMinPay.value = [bank[0].minPay];
+  inputTerm.value = [bank[0].term];
 }
 function addBank(bank) {
   banks.push(bank);
@@ -139,11 +146,13 @@ saveNewBank.addEventListener("click", (event) => {
   const formPrecents = formI.get("precents");
   const formMaxCredit = formI.get("maxCredit");
   const formMinDownPayment = formI.get("minDownPayment");
+  const formTerm = formI.get("term");
   if (
     formName == "" ||
     formPrecents == "" ||
     formMaxCredit == "" ||
-    formMinDownPayment == ""
+    formMinDownPayment == "" ||
+    formTerm == ""
   ) {
     alert("Аill in the field");
   } else {
@@ -152,6 +161,7 @@ saveNewBank.addEventListener("click", (event) => {
       precents: formPrecents,
       maxCredit: formMaxCredit,
       minPay: formMinDownPayment,
+      term: formTerm,
     };
 
     addBank(newBank);
@@ -172,6 +182,7 @@ cancelNewBank.addEventListener("click", (event) => {
 const dropDown = document.getElementById("drop_down");
 const minCal = document.getElementById("min");
 const maxCal = document.getElementById("max");
+const term = document.getElementById("term");
 
 const resultAm = document.getElementById("result_amount");
 
@@ -191,33 +202,60 @@ function renderInput(banks) {
   }
 }
 function selBan() {
-
   let sel = document.getElementById("drop_down").selectedIndex;
   let banksAll = document.getElementById("drop_down").options;
   let opt = banksAll.selectedIndex;
-  maxCal.innerHTML += banks[opt].maxCredit;
-  minCal.innerHTML += banks[opt].minPay;
+  maxCal.innerHTML = " Max Credit: " + banks[opt].maxCredit;
+  minCal.innerHTML = "Min Down Payment: " + banks[opt].minPay;
+  term.innerHTML = "Term: " + banks[opt].term;
   return opt;
 }
 
-
-// let result = selBan();
 res.addEventListener("click", (event) => {
   event.preventDefault();
+  let select = selBan(banks);
+  let result = 0;
   const startCredit = document.getElementById("startCredit").value;
   const firstPayment = document.getElementById("firstPayment").value;
-  selBan();
-  let select = selBan(banks);
-  console.log(banks[select].precents + Number(startCredit));
-});
-// M - щомісячний платіж
-// P - сума позики
-// r - річна процентна ставка
-// n - кількість щомісячних платежів
-let m = 0,
-  p = 20000,
-  r = 10,
-  n = 12;
+  // const banksAll = document.getElementById("drop_down").options;
+  // let selIn = banksAll.selectedIndex;
+  const start = Number(startCredit);
+  const first = Number(firstPayment);
+  const max = banks[select].maxCredit;
+  const min = banks[select].minPay;
+  const term = banks[select].term;
+  const proc = (start / 100) * banks[select].precents;
 
-m = p * (r / 12) * (1 + r / 12) ** n / ((1 + r / 12) ** n) - 1;
-console.log(m);
+  if (start > max) {
+    alert("The credit exceeds the maximum credit of the selected bank");
+  } else if (first < min) {
+    alert("The amount of the minimum down payment, too low");
+  } else if (first > start){
+    alert("er");
+  }else {
+    result =
+      start +
+      (((proc / 12) * (1 + (proc / 12))) ** term) / (((1 + proc / 12) ** term) - 1);
+  }
+
+  // console.log(firstPayment);
+  // console.log(banks[selIn].term);
+  // selBan(Number(startCredit));
+  // console.log(select);
+  // resultAm.innerHTML = console.log(
+  //   banks[select].precents + Number(startCredit) + Number(firstPayment)
+  // );
+  resultAm.innerHTML = result.toFixed(0);
+});
+// //
+// // M - щомісячний платіж
+// // P - сума позики
+// // r - річна процентна ставка
+// // n - кількість щомісячних платежів
+// let m = 0,
+//   p = 20000,
+//   r = 10,
+//   n = 12;
+
+// m = (p * (r / 12) * (1 + r / 12) ** n) / (1 + r / 12) ** n - 1;
+// // console.log(m);
