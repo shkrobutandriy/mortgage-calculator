@@ -234,7 +234,7 @@ res.addEventListener("click", (event) => {
     alert("er");
   } else {
     result =
-      (start + (proc / 12 + (1 + proc / 12)) ** term) /
+      (start * (proc / 12) * (1 + proc / 12) ** term) /
       ((1 + proc / 12) ** term - 1);
   }
 
