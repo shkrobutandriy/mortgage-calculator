@@ -217,8 +217,6 @@ res.addEventListener("click", (event) => {
   let result = 0;
   const startCredit = document.getElementById("startCredit").value;
   const firstPayment = document.getElementById("firstPayment").value;
-  // const banksAll = document.getElementById("drop_down").options;
-  // let selIn = banksAll.selectedIndex;
   const start = Number(startCredit);
   const first = Number(firstPayment);
   const max = banks[select].maxCredit;
@@ -238,24 +236,5 @@ res.addEventListener("click", (event) => {
       ((1 + proc / 12) ** term - 1);
   }
 
-  // console.log(firstPayment);
-  // console.log(banks[selIn].term);
-  // selBan(Number(startCredit));
-  // console.log(select);
-  // resultAm.innerHTML = console.log(
-  //   banks[select].precents + Number(startCredit) + Number(firstPayment)
-  // );
   resultAm.innerHTML = result.toFixed(0);
 });
-// //
-// // M - щомісячний платіж
-// // P - сума позики
-// // r - річна процентна ставка
-// // n - кількість щомісячних платежів
-// let m = 0,
-//   p = 20000,
-//   r = 10,
-//   n = 12;
-
-// m = (p * (r / 12) * (1 + r / 12) ** n) / (1 + r / 12) ** n - 1;
-// // console.log(m);
