@@ -38,6 +38,8 @@ const banks = [
   },
 ];
 
+let bankToBeModified = null;
+
 renderBanks(banks);
 function renderBanks(banks) {
   allBank.innerHTML = "";
@@ -69,13 +71,8 @@ function chahgeB(bank) {
   inputMaxCredit.value = [bank[0].maxCredit];
   inputMinPay.value = [bank[0].minPay];
 }
-const takeActiveBank = (currentActive) => {
-  const dataValue = currentActive.dataset.name;
-  const currentBank = banks.find((bank) => bank.name === dataValue);
-  console.log(currentBank);
-};
 function addBank(bank) {
-  banks.unshift(bank);
+  banks.push(bank);
   renderBanks(banks);
 }
 addBanks.addEventListener("click", () => {
@@ -98,10 +95,10 @@ chahgeBanks.addEventListener("click", (event) => {
     if (el.classList.contains("active_fix")) {
       el.addEventListener("click", () => {
         if (el.classList.contains("active_fix")) {
-          const a = banks.slice(i);
+          bankToBeModified = banks.slice(i);
           banks.splice(i, 1);
           renderBanks(banks);
-          chahgeB(a);
+          chahgeB(bankToBeModified);
         }
       });
     }
@@ -159,11 +156,68 @@ saveNewBank.addEventListener("click", (event) => {
 
     addBank(newBank);
     inputClean();
+    renderInput(banks);
   }
 });
 
 cancelNewBank.addEventListener("click", (event) => {
   event.preventDefault();
   activeAdd.classList.remove("active");
+  if (bankToBeModified !== null) {
+    addBank(bankToBeModified[0]);
+  }
   renderBanks(banks);
 });
+
+const dropDown = document.getElementById("drop_down");
+const minCal = document.getElementById("min");
+const maxCal = document.getElementById("max");
+
+const resultAm = document.getElementById("result_amount");
+
+const res = document.getElementById("res");
+
+renderInput(banks);
+selBan(banks);
+function renderInput(banks) {
+  dropDown.innerHTML = "";
+  for (const bank of banks) {
+    const dropD = `
+     <option value="${bank.precents}">${bank.name} ${
+      bank.precents
+    }${"%"}</option>
+    `;
+    dropDown.innerHTML += dropD;
+  }
+}
+function selBan() {
+
+  let sel = document.getElementById("drop_down").selectedIndex;
+  let banksAll = document.getElementById("drop_down").options;
+  let opt = banksAll.selectedIndex;
+  maxCal.innerHTML += banks[opt].maxCredit;
+  minCal.innerHTML += banks[opt].minPay;
+  return opt;
+}
+
+
+// let result = selBan();
+res.addEventListener("click", (event) => {
+  event.preventDefault();
+  const startCredit = document.getElementById("startCredit").value;
+  const firstPayment = document.getElementById("firstPayment").value;
+  selBan();
+  let select = selBan(banks);
+  console.log(banks[select].precents + Number(startCredit));
+});
+// M - щомісячний платіж
+// P - сума позики
+// r - річна процентна ставка
+// n - кількість щомісячних платежів
+let m = 0,
+  p = 20000,
+  r = 10,
+  n = 12;
+
+m = p * (r / 12) * (1 + r / 12) ** n / ((1 + r / 12) ** n) - 1;
+console.log(m);
