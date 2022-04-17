@@ -230,12 +230,12 @@ res.addEventListener("click", (event) => {
     alert("The credit exceeds the maximum credit of the selected bank");
   } else if (first < min) {
     alert("The amount of the minimum down payment, too low");
-  } else if (first > start){
+  } else if (first > start) {
     alert("er");
-  }else {
+  } else {
     result =
       start +
-      (((proc / 12) * (1 + (proc / 12))) ** term) / (((1 + proc / 12) ** term) - 1);
+      ((proc / 12) * (1 + proc / 12) ** term) / ((1 + proc / 12) ** term - 1);
   }
 
   // console.log(firstPayment);
