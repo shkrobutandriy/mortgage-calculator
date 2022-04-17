@@ -224,8 +224,8 @@ res.addEventListener("click", (event) => {
   const max = banks[select].maxCredit;
   const min = banks[select].minPay;
   const term = banks[select].term;
-  const proc = (start / 100) * banks[select].precents;
-
+  const proc = banks[select].precents;
+  console.log(proc);
   if (start > max) {
     alert("The credit exceeds the maximum credit of the selected bank");
   } else if (first < min) {
@@ -234,8 +234,8 @@ res.addEventListener("click", (event) => {
     alert("er");
   } else {
     result =
-      start +
-      ((proc / 12) * (1 + proc / 12) ** term) / ((1 + proc / 12) ** term - 1);
+      (start + (proc / 12 + (1 + proc / 12)) ** term) /
+      ((1 + proc / 12) ** term - 1);
   }
 
   // console.log(firstPayment);
