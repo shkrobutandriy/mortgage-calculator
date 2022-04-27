@@ -236,6 +236,6 @@ res.addEventListener("click", (event) => {
     alert("The down payment may not exceed the loan amount");
   } else {
     result = (start + (((start / 100) * proc) / 12) * term) / term;
-    resultAm.innerHTML = result.toFixed(2);
+    resultAm.innerHTML = "$" + result.toFixed(2);
   }
 });
