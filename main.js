@@ -23,21 +23,21 @@ const banks = [
     name: "Privat",
     precents: 10,
     maxCredit: 500000,
-    minPay: 35000,
+    minPay: 5,
     term: 12,
   },
   {
     name: "Alfa",
     precents: 14.3,
     maxCredit: 350000,
-    minPay: 20000,
+    minPay: 20,
     term: 10,
   },
   {
     name: "Credo",
     precents: 17,
     maxCredit: 200000,
-    minPay: 10000,
+    minPay: 10,
     term: 18,
   },
 ];
@@ -55,7 +55,7 @@ function renderBanks(banks) {
         </button>
         <div class="max_min">
           <div><span>Max Credit </span>${bank.maxCredit}<span>$</span></div>
-          <div><span>Min Down Payment </span>${bank.minPay}<span>$</span></div>
+          <div><span>Min Down Payment </span>${bank.minPay}<span>%</span></div>
           <div><span>Term: </span>${bank.term}</div>
         </div>
     `;
@@ -206,7 +206,7 @@ function selBan() {
   let banksAll = document.getElementById("drop_down").options;
   let opt = banksAll.selectedIndex;
   maxCal.innerHTML = " Max Credit: " + banks[opt].maxCredit;
-  minCal.innerHTML = "Min Down Payment: " + banks[opt].minPay;
+  minCal.innerHTML = "Min Down Payment: " + banks[opt].minPay + "%";
   term.innerHTML = "Term: " + banks[opt].term;
   return opt;
 }
@@ -217,23 +217,25 @@ res.addEventListener("click", (event) => {
   let result = 0;
   const startCredit = document.getElementById("startCredit").value;
   const firstPayment = document.getElementById("firstPayment").value;
-  const start = Number(startCredit);
+  const credit = Number(startCredit);
   const first = Number(firstPayment);
+  const start = credit - first;
   const max = banks[select].maxCredit;
   const min = banks[select].minPay;
   const term = banks[select].term;
   const proc = banks[select].precents;
+  const minProc = (credit / 100) * min;
+
   if (start > max) {
     alert("The credit exceeds the maximum credit of the selected bank");
-  } else if (first < min) {
-    alert("The amount of the minimum down payment, too low");
+  } else if (first < minProc) {
+    alert(
+      `Down payment of the selected bank ${min}% that is at least $${minProc}`
+    );
   } else if (first > start) {
-    alert("er");
+    alert("The down payment may not exceed the loan amount");
   } else {
-    result =
-      (start * ((proc / 12) * (1 + proc / 12)) ** term) /
-      ((1 + proc / 12) ** term - 1);
+    result = (start + (((start / 100) * proc) / 12) * term) / term;
+    resultAm.innerHTML = result.toFixed(2);
   }
-
-  resultAm.innerHTML = result.toFixed(2);
 });
