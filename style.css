@@ -157,3 +157,8 @@ display: block;
 .title_inpun {
 font-size: 10px;
 }
+.test {
+  font-size: 30px;
+  color: red;
+  background-color: aqua;
+}

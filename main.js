@@ -87,17 +87,14 @@ addBanks.addEventListener("click", () => {
 });
 chahgeBanks.addEventListener("click", (event) => {
   event.preventDefault();
+  activeAdd.classList.remove("active");
   const bankEl = document.querySelectorAll(".bank");
   for (let i = 0; i < bankEl.length; i += 1) {
     const el = bankEl[i];
     if (el.classList.contains("active")) {
       el.classList.remove("active");
     }
-    if (!el.classList.contains("active_fix")) {
-      el.classList.add("active_fix");
-    } else {
-      el.classList.remove("active_fix");
-    }
+    el.classList.toggle("active_fix");
     if (el.classList.contains("active_fix")) {
       el.addEventListener("click", () => {
         if (el.classList.contains("active_fix")) {
@@ -114,18 +111,14 @@ chahgeBanks.addEventListener("click", (event) => {
 
 removeBanks.addEventListener("click", (event) => {
   event.preventDefault();
+  activeAdd.classList.remove("active");
   const bankEl = document.querySelectorAll(".bank");
   for (let i = 0; i < bankEl.length; i += 1) {
     const el = bankEl[i];
-    console.log(el);
     if (el.classList.contains("active_fix")) {
       el.classList.remove("active_fix");
     }
-    if (!el.classList.contains("active")) {
-      el.classList.add("active");
-    } else {
-      el.classList.remove("active");
-    }
+    el.classList.toggle("active");
     if (el.classList.contains("active")) {
       el.addEventListener("click", () => {
         if (el.classList.contains("active")) {
