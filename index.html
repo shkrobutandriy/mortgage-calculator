@@ -33,6 +33,7 @@
                 action="#"
                 method="post"
               >
+                <label class="title_inpun" for="">Name Bank</label>
                 <input
                   class="btn_bank"
                   name="name"
@@ -40,6 +41,7 @@
                   type="text"
                   id="inputName"
                 />
+                <label class="title_inpun" for="">Interest Rate</label>
                 <input
                   class="btn_bank"
                   name="precents"
@@ -47,6 +49,7 @@
                   type="number"
                   id="inputPrecent"
                 />
+                <label class="title_inpun" for="">Max Credit</label>
                 <input
                   class="btn_bank"
                   name="maxCredit"
@@ -54,13 +57,17 @@
                   type="number"
                   id="inputMax"
                 />
+                <label class="title_inpun" for="">Min Down Payment In %</label>
                 <input
                   class="btn_bank"
                   name="minDownPayment"
                   placeholder="Min Down Payment"
                   type="number"
                   id="inputMin"
+                  min="0"
+                  max="100"
                 />
+                <label class="title_inpun" for="">Term</label>
                 <input
                   class="btn_bank"
                   name="term"

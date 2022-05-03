@@ -90,7 +90,6 @@ chahgeBanks.addEventListener("click", (event) => {
   const bankEl = document.querySelectorAll(".bank");
   for (let i = 0; i < bankEl.length; i += 1) {
     const el = bankEl[i];
-    activeAdd.classList.add("active");
     if (el.classList.contains("active")) {
       el.classList.remove("active");
     }
@@ -102,6 +101,7 @@ chahgeBanks.addEventListener("click", (event) => {
     if (el.classList.contains("active_fix")) {
       el.addEventListener("click", () => {
         if (el.classList.contains("active_fix")) {
+          activeAdd.classList.add("active");
           bankToBeModified = banks.slice(i);
           banks.splice(i, 1);
           renderBanks(banks);
@@ -131,6 +131,8 @@ removeBanks.addEventListener("click", (event) => {
         if (el.classList.contains("active")) {
           banks.splice(i, 1);
           renderBanks(banks);
+          renderInput(banks);
+          selBan(banks);
         }
       });
     }
@@ -163,10 +165,12 @@ saveNewBank.addEventListener("click", (event) => {
       minPay: formMinDownPayment,
       term: formTerm,
     };
-
+    // renderBanks(banks);
     addBank(newBank);
     inputClean();
     renderInput(banks);
+    selBan(banks);
+    activeAdd.classList.remove("active");
   }
 });
 
@@ -205,7 +209,7 @@ function selBan() {
   let sel = document.getElementById("drop_down").selectedIndex;
   let banksAll = document.getElementById("drop_down").options;
   let opt = banksAll.selectedIndex;
-  maxCal.innerHTML = " Max Credit: " + banks[opt].maxCredit;
+  maxCal.innerHTML = " Max Credit: " + banks[opt].maxCredit + "$";
   minCal.innerHTML = "Min Down Payment: " + banks[opt].minPay + "%";
   term.innerHTML = "Term: " + banks[opt].term;
   return opt;
@@ -227,7 +231,7 @@ res.addEventListener("click", (event) => {
   const minProc = (credit / 100) * min;
 
   if (start > max) {
-    alert("The credit exceeds the maximum credit of the selected bank");
+    alert(`The credit exceeds the maximum credit of the selected bank ${max}`);
   } else if (first < minProc) {
     alert(
       `Down payment of the selected bank ${min}% that is at least $${minProc}`

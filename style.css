@@ -13,7 +13,7 @@ border: #c4c8cc solid 1px;
 border-radius: 8px;
 }
 input.btn_bank {
-  margin: 16px 0;
+  margin-bottom: 0;
 }
 .container {
   max-width: 840px;
@@ -153,4 +153,7 @@ display: block;
 }
 #result_amount{
   font-size: 26px;
+}
+.title_inpun {
+font-size: 10px;
 }
