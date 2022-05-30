@@ -1,13 +1,13 @@
 const allBank = document.getElementById("all_banks");
 const activeAdd = document.getElementById("inputBtn");
+// btn
 const saveNewBank = document.getElementById("saveNewBank");
 const cancelNewBank = document.getElementById("cancelNewBank");
-// btn
 const addBanks = document.getElementById("add");
 const chahgeBanks = document.getElementById("chahge");
 const removeBanks = document.getElementById("remove");
 // input
-const form = document.forms.formBank;
+ const form = document.forms.formBank;
 
 const inputName = document.getElementById("inputName");
 const inputPrecents = document.getElementById("inputPrecent");
@@ -18,6 +18,8 @@ const inputTerm = document.getElementById("inputTerm");
 const inputBtn = document.getElementById("inputBtn");
 const selBtn = document.getElementById("selBank");
 const maxmin = document.getElementById("maxmin");
+
+let bankToBeModified = null;
 const banks = [
   {
     name: "Privat",
@@ -41,9 +43,6 @@ const banks = [
     term: 18,
   },
 ];
-
-let bankToBeModified = null;
-
 renderBanks(banks);
 function renderBanks(banks) {
   allBank.innerHTML = "";
@@ -62,7 +61,6 @@ function renderBanks(banks) {
     allBank.innerHTML += bankBtn;
   });
 }
-// button
 
 function inputClean() {
   inputName.value = "";
@@ -151,19 +149,27 @@ saveNewBank.addEventListener("click", (event) => {
   ) {
     alert("Аill in the field");
   } else {
+    let err;
     const newBank = {
       name: formName,
       precents: formPrecents,
       maxCredit: formMaxCredit,
-      minPay: formMinDownPayment,
+      minPay:
+        formMinDownPayment > 100
+          ? (err = prompt(
+              "The down payment may not exceed the loan amount",
+              formMinDownPayment
+            ))
+          : formMinDownPayment,
       term: formTerm,
     };
-    // renderBanks(banks);
-    addBank(newBank);
-    inputClean();
-    renderInput(banks);
-    selBan(banks);
-    activeAdd.classList.remove("active");
+    if (err !== null) {
+      addBank(newBank);
+      inputClean();
+      renderInput(banks);
+      selBan(banks);
+      activeAdd.classList.remove("active");
+    }
   }
 });
 
@@ -174,6 +180,8 @@ cancelNewBank.addEventListener("click", (event) => {
     addBank(bankToBeModified[0]);
   }
   renderBanks(banks);
+  inputClean();
+  bankToBeModified = null;
 });
 
 const dropDown = document.getElementById("drop_down");
@@ -229,7 +237,7 @@ res.addEventListener("click", (event) => {
     alert(
       `Down payment of the selected bank ${min}% that is at least $${minProc}`
     );
-  } else if (first > start) {
+  } else if (first > credit) {
     alert("The down payment may not exceed the loan amount");
   } else {
     result = (start + (((start / 100) * proc) / 12) * term) / term;
